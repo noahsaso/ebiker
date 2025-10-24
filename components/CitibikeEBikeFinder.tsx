@@ -152,10 +152,10 @@ export default function CitibikeEBikeFinder() {
     <div className="min-h-screen bg-linear-to-br from-primary to-primary-dark p-5">
       <div className="max-w-3xl mx-auto">
         <header className="text-center text-white mb-8">
-          <h1 className="text-4xl mb-2.5 [text-shadow:2px_2px_4px_rgba(0,0,0,0.2)]">
-            🚴‍♂️ Citibike E-Bike Finder
+          <h1 className="text-4xl mb-2.5 text-shadow-sm">
+            🚴‍♂️ E-Bike Finder
           </h1>
-          <p className="text-lg opacity-90">Find e-bikes available near you</p>
+          <p className="text-lg opacity-90 hidden sm:block">Find e-bikes available near you</p>
         </header>
 
         <Controls
