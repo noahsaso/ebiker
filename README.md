@@ -4,12 +4,15 @@ Find Citibike e-bikes available near you in real-time.
 
 ## Features
 
-- 📍 **Real-time Location**: Uses browser geolocation to find your current position
-- 🔍 **Smart Filtering**: Filter stations by distance and minimum e-bikes available
+- 📍 **Auto-Loading**: Automatically searches for nearby e-bikes on page load if location permission was previously granted
+- 🔍 **Smart Filtering**: Filter stations by distance (0.5-10 miles) and minimum e-bikes available (defaults to 3)
 - 📊 **Live Stats**: View total stations, e-bikes available, and nearest distance
-- 🗺️ **Maps Integration**: Get directions or view stations on Google Maps
+- 🗺️ **Inline Map View**: Toggle inline Google Maps for each station with one click
+- 🧭 **Walking Directions**: Get turn-by-turn directions in Google Maps
+- 📏 **Smart Distance Display**: Shows distance in feet for nearby stations (<0.3 mi), miles for farther ones
 - ⚡ **Real-time Data**: Fetches live data from Citibike's GBFS API
-- 🎨 **Modern UI**: Beautiful gradient design with smooth animations
+- 📱 **Mobile Responsive**: Optimized for mobile with viewport-aware map sizing
+- 🎨 **Modern UI**: Beautiful gradient design with inline Tailwind CSS and smooth animations
 
 ## Tech Stack
 
@@ -24,7 +27,7 @@ Find Citibike e-bikes available near you in real-time.
 ```
 ebiker/
 ├── app/                      # Next.js app directory
-│   ├── globals.css          # Global styles
+│   ├── globals.css          # Tailwind imports and theme config
 │   ├── layout.tsx           # Root layout
 │   └── page.tsx             # Home page
 ├── components/              # React components
@@ -76,11 +79,14 @@ pnpm start
 
 ## How It Works
 
-1. **Location Detection**: The app requests your browser location using the Geolocation API
-2. **Data Fetching**: Fetches station information and real-time status from Citibike's GBFS API
-3. **Distance Calculation**: Uses the Haversine formula to calculate distances from your location
-4. **Filtering**: Filters stations based on your selected distance and minimum e-bikes
-5. **Display**: Shows up to 20 nearest stations with available e-bikes
+1. **Auto-Load**: On page load, the app automatically requests your location if permissions were previously granted
+2. **Location Detection**: Uses the browser Geolocation API to find your current position
+3. **Data Fetching**: Fetches station information and real-time status from Citibike's GBFS API
+4. **Distance Calculation**: Uses the Haversine formula to calculate distances from your location
+5. **Smart Display**: Shows distances in feet (<0.3 mi) or miles, making it easy to gauge proximity
+6. **Filtering**: Filters stations based on your selected distance and minimum e-bikes (default: 3)
+7. **Results**: Displays up to 20 nearest stations with available e-bikes, sorted by distance
+8. **Interactive Maps**: Click "View Map" to see each station's location in an inline embedded map
 
 ## API
 
