@@ -30,15 +30,19 @@ export default function Filters({
       </div>
       <div className="flex-1 flex flex-col">
         <label htmlFor="minBikes" className="block mb-1.5 text-sm text-gray-600 font-medium">Min E-Bikes</label>
-        <input
-          type="number"
+        <select
           id="minBikes"
           value={minBikes}
-          min="0"
-          max="20"
-          onChange={(e) => onMinBikesChange(parseInt(e.target.value) || 0)}
+          onChange={(e) => onMinBikesChange(parseInt(e.target.value))}
           className="w-full p-2 border border-gray-300 rounded-md text-base grow"
-        />
+        >
+          <option value="0">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
     </div>
   );
