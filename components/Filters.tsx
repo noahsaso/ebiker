@@ -12,14 +12,14 @@ export default function Filters({
   onMinBikesChange,
 }: FiltersProps) {
   return (
-    <div className="flex gap-4 mt-4">
+    <div className="flex gap-4">
       <div className="flex-1 flex flex-col">
-        <label htmlFor="maxDistance" className="block mb-1.5 text-sm text-gray-600 font-medium">Max Distance</label>
+        <label htmlFor="maxDistance" className="block mb-1.5 text-sm text-gray-800 font-medium">Max Distance</label>
         <select
           id="maxDistance"
           value={maxDistance}
           onChange={(e) => onMaxDistanceChange(parseFloat(e.target.value))}
-          className="w-full p-2 border border-gray-300 rounded-md text-base grow"
+          className="w-full p-2 bg-white/30 rounded-md text-base grow shadow-xs cursor-pointer"
         >
           <option value="0.5">0.5 miles</option>
           <option value="1">1 mile</option>
@@ -29,12 +29,12 @@ export default function Filters({
         </select>
       </div>
       <div className="flex-1 flex flex-col">
-        <label htmlFor="minBikes" className="block mb-1.5 text-sm text-gray-600 font-medium">Min E-Bikes</label>
+        <label htmlFor="minBikes" className="block mb-1.5 text-sm text-gray-800 font-medium">Min E-Bikes</label>
         <select
           id="minBikes"
           value={minBikes}
           onChange={(e) => onMinBikesChange(parseInt(e.target.value))}
-          className="w-full p-2 border border-gray-300 rounded-md text-base grow"
+          className="w-full p-2 bg-white/30 rounded-md text-base grow shadow-xs cursor-pointer"
         >
           <option value="0">Any</option>
           <option value="1">1</option>

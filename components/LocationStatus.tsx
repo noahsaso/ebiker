@@ -14,7 +14,7 @@ export default function LocationStatus({ status, type }: LocationStatusProps) {
   };
 
   return (
-    <div className="flex items-center gap-2.5 mb-5 p-4 bg-gray-50 rounded-lg">
+    <div className="flex items-center gap-2.5 p-4 bg-white/20 rounded-lg shadow-xs">
       <div className={statusIconClasses[type]} />
       <span className="flex-1">{status}</span>
     </div>

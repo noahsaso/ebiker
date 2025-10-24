@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { ChevronDown, Heart } from "lucide-react";
 import Controls from "./Controls";
-import StatsDisplay from "./Stats";
 import StationCard from "./StationCard";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
@@ -97,7 +96,7 @@ export default function CitibikeEBikeFinder() {
       setStats({
         totalStations: filtered.length,
         totalEBikes: totalBikes,
-        nearestDistance: parseFloat(filtered[0].distance.toFixed(2)),
+        nearestDistance: filtered[0].distance,
       });
     } else {
       setStats({
@@ -171,11 +170,10 @@ export default function CitibikeEBikeFinder() {
           disabled={
             loading || (statusType === "error" && !isGeolocationSupported())
           }
+          stats={stats}
         />
 
-        {stats.totalStations > 0 && <StatsDisplay stats={stats} />}
-
-        <div>
+        <div className="mt-5">
           {loading && <LoadingSpinner />}
 
           {error && !loading && <ErrorMessage error={error} />}
@@ -199,10 +197,10 @@ export default function CitibikeEBikeFinder() {
                   if (favoriteStations.length === 0) return null;
 
                    return (
-                     <div className="mb-6 bg-white rounded-xl shadow-sm overflow-hidden">
+                     <div className="mb-6 bg-white/60 backdrop-blur-lg rounded-lg shadow-sm border border-white/20 overflow-hidden">
                        <button
                          onClick={() => setShowFavorites(!showFavorites)}
-                         className="w-full p-4 flex items-center justify-between transition-all hover:bg-gray-50 cursor-pointer"
+                         className="w-full p-4 flex items-center justify-between transition-all hover:bg-white/20 cursor-pointer"
                        >
                          <div className="flex items-center gap-2">
                            <Heart size={20} className="fill-favorite text-favorite" />
@@ -219,13 +217,12 @@ export default function CitibikeEBikeFinder() {
                          />
                        </button>
                        {showFavorites && (
-                         <div className="p-4 bg-gray-50 border-t border-gray-200">
+                         <div className="p-4 border-t border-white/20">
                            <div className="grid gap-4">
                              {favoriteStations.map((station) => (
                                <StationCard
                                  key={station.station_id}
                                  station={station}
-                                 userLocation={userLocation}
                                  isFavorite={true}
                                  onToggleFavorite={toggleFavorite}
                                />
@@ -251,7 +248,6 @@ export default function CitibikeEBikeFinder() {
                         <StationCard
                           key={station.station_id}
                           station={station}
-                          userLocation={userLocation}
                           isFavorite={false}
                           onToggleFavorite={toggleFavorite}
                         />

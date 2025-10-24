@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { MapPin, Navigation, Zap, Bike, Lock, X, Heart } from 'lucide-react';
-import type { Station, Location } from '@/types/station';
+import type { Station } from '@/types/station';
+import clsx from 'clsx';
 
 interface StationCardProps {
   station: Station;
-  userLocation: Location;
   isFavorite: boolean;
   onToggleFavorite: (stationId: string) => void;
 }
 
-export default function StationCard({ station, userLocation, isFavorite, onToggleFavorite }: StationCardProps) {
+export default function StationCard({ station, isFavorite, onToggleFavorite }: StationCardProps) {
   const [showMap, setShowMap] = useState(false);
   const regularBikes = station.num_bikes_available - station.num_ebikes_available;
   
@@ -21,17 +21,17 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
     : `${station.distance.toFixed(2)} mi`;
 
   return (
-    <div className="flex flex-col gap-4 bg-white rounded-xl p-4 sm:p-5 shadow-sm transition-all hover:shadow-lg">
+    <div className={clsx("flex flex-col gap-4 rounded-lg p-4 sm:p-5 shadow-sm transition-all hover:shadow-lg", isFavorite ? 'bg-white/30' : 'bg-white/40 backdrop-blur-lg')}>
       <div className="flex justify-between items-start">
-        <div className="flex items-center gap-2 flex-1">
+        <div className="flex items-center gap-1.5 flex-1">
           <button
             onClick={() => onToggleFavorite(station.station_id)}
-            className="p-1 rounded-full transition-colors hover:bg-gray-100 cursor-pointer"
+            className="p-1 rounded-full transition-colors hover:bg-white/30 cursor-pointer"
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
             <Heart
-              size={20}
-              className={isFavorite ? 'fill-favorite text-favorite' : 'text-gray-400'}
+              size={22}
+              className={clsx('text-favorite', isFavorite && 'fill-favorite')}
             />
           </button>
           <div className="text-xl font-semibold text-gray-800 flex-1">{station.name}</div>
@@ -44,7 +44,7 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
           <Zap size={20} className="text-primary" />
           <div>
             <div className="text-lg font-semibold text-gray-800">{station.num_ebikes_available}</div>
-            <div className="text-xs text-gray-600">E-Bikes</div>
+            <div className="text-xs text-gray-800">E-Bikes</div>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
           <Bike size={20} className="text-primary" />
           <div>
             <div className="text-lg font-semibold text-gray-800">{regularBikes}</div>
-            <div className="text-xs text-gray-600">Regular</div>
+            <div className="text-xs text-gray-800">Regular</div>
           </div>
         </div>
 
@@ -60,23 +60,23 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
           <Lock size={20} className="text-primary" />
           <div>
             <div className="text-lg font-semibold text-gray-800">{station.num_docks_available}</div>
-            <div className="text-xs text-gray-600">Docks</div>
+            <div className="text-xs text-gray-800">Docks</div>
           </div>
         </div>
       </div>
 
       <div className="flex gap-2.5">
         <a
-          href={`https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lon}&destination=${station.lat},${station.lon}&travelmode=walking`}
+          href={`https://www.google.com/maps/dir/?api=1&destination=${station.lat},${station.lon}&travelmode=walking`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 p-1 sm:p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg no-underline text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300"
+          className="flex-1 p-1 sm:p-2.5 bg-white/40 rounded-lg no-underline text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-white/60 shadow-sm"
         >
           <Navigation size={16} /> Directions
         </a>
         <button
           onClick={() => setShowMap(!showMap)}
-          className="flex-1 p-1 sm:p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300 cursor-pointer"
+          className="flex-1 p-1 sm:p-2.5 bg-white/40 rounded-lg text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-white/60 cursor-pointer shadow-sm"
         >
           {showMap ? <X size={16} /> : <MapPin size={16} />}
           {showMap ? 'Hide Map' : 'View Map'}
@@ -84,7 +84,7 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
       </div>
 
       {showMap && (
-        <div className="rounded-lg overflow-hidden border-2 border-gray-200">
+        <div className="rounded-lg overflow-hidden border-2 border-white/30">
           <iframe
             width="100%"
             height="250"
