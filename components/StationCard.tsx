@@ -76,7 +76,7 @@ export default function StationCard({ station, userLocation }: StationCardProps)
             height="250"
             className="max-h-[70vh]"
             style={{ border: 0 }}
-            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${station.lat},${station.lon}&zoom=16`}
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${station.lat},${station.lon}&zoom=16`}
             allowFullScreen
             title={`Map of ${station.name}`}
           />
