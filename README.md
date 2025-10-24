@@ -97,4 +97,4 @@ This app uses the [Citibike GBFS API](https://gbfs.lyft.com/gbfs/2.3/bkn/en/):
 
 ## License
 
-MIT
+BSD 3-Clause
