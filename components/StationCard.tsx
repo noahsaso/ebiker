@@ -21,8 +21,8 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
     : `${station.distance.toFixed(2)} mi`;
 
   return (
-    <div className="bg-white rounded-xl p-5 shadow-sm transition-all hover:shadow-lg">
-      <div className="flex justify-between items-start mb-4">
+    <div className="flex flex-col gap-4 bg-white rounded-xl p-4 sm:p-5 shadow-sm transition-all hover:shadow-lg">
+      <div className="flex justify-between items-start">
         <div className="flex items-center gap-2 flex-1">
           <button
             onClick={() => onToggleFavorite(station.station_id)}
@@ -39,7 +39,7 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
         <div className="bg-linear-to-br from-primary to-primary-dark text-white py-1.5 px-3 rounded-full text-sm font-semibold whitespace-nowrap">{distanceDisplay}</div>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 mb-4">
+      <div className="flex flex-row justify-between gap-4 flex-wrap">
         <div className="flex items-center gap-2">
           <Zap size={20} className="text-primary" />
           <div>
@@ -65,18 +65,18 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
         </div>
       </div>
 
-      <div className="flex gap-2.5 mb-4">
+      <div className="flex gap-2.5">
         <a
           href={`https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lon}&destination=${station.lat},${station.lon}&travelmode=walking`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg no-underline text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300"
+          className="flex-1 p-1 sm:p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg no-underline text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300"
         >
           <Navigation size={16} /> Directions
         </a>
         <button
           onClick={() => setShowMap(!showMap)}
-          className="flex-1 p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300 cursor-pointer"
+          className="flex-1 p-1 sm:p-2.5 bg-gray-50 border-2 border-gray-200 rounded-lg text-gray-800 flex items-center justify-center gap-1.5 font-medium transition-all hover:bg-gray-200 hover:border-gray-300 cursor-pointer"
         >
           {showMap ? <X size={16} /> : <MapPin size={16} />}
           {showMap ? 'Hide Map' : 'View Map'}
@@ -84,7 +84,7 @@ export default function StationCard({ station, userLocation, isFavorite, onToggl
       </div>
 
       {showMap && (
-        <div className="mt-4 rounded-lg overflow-hidden border-2 border-gray-200">
+        <div className="rounded-lg overflow-hidden border-2 border-gray-200">
           <iframe
             width="100%"
             height="250"
