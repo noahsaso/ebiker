@@ -29,11 +29,11 @@ export default function Controls({
   disabled,
 }: ControlsProps) {
   return (
-    <div className="bg-white rounded-xl p-5 mb-5 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
+    <div className="bg-white rounded-xl p-5 mb-5 shadow-sm">
       <LocationStatus status={locationStatus} type={statusType} />
 
       <button
-        className="w-full p-4 bg-linear-to-br from-primary to-primary-dark text-white border-0 rounded-lg text-lg font-semibold cursor-pointer transition-all flex items-center justify-center gap-2.5 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_rgba(102,126,234,0.4)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none"
+        className="w-full p-4 bg-linear-to-br from-primary to-primary-dark text-white border-0 rounded-lg text-lg font-semibold cursor-pointer transition-all flex items-center justify-center gap-2.5 hover:shadow-sm disabled:bg-gray-300 disabled:cursor-not-allowed disabled:transform-none"
         onClick={onFindClick}
         disabled={disabled}
       >

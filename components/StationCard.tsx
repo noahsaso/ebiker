@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Navigation, Zap, Bike, Lock, X } from 'lucide-react';
+import { MapPin, Navigation, Zap, Bike, Lock, X, Heart } from 'lucide-react';
 import type { Station, Location } from '@/types/station';
 
 interface StationCardProps {
   station: Station;
   userLocation: Location;
+  isFavorite: boolean;
+  onToggleFavorite: (stationId: string) => void;
 }
 
-export default function StationCard({ station, userLocation }: StationCardProps) {
+export default function StationCard({ station, userLocation, isFavorite, onToggleFavorite }: StationCardProps) {
   const [showMap, setShowMap] = useState(false);
   const regularBikes = station.num_bikes_available - station.num_ebikes_available;
   
@@ -19,9 +21,21 @@ export default function StationCard({ station, userLocation }: StationCardProps)
     : `${station.distance.toFixed(2)} mi`;
 
   return (
-    <div className="bg-white rounded-xl p-5 shadow-[0_5px_20px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)]">
+    <div className="bg-white rounded-xl p-5 shadow-sm transition-all hover:shadow-lg">
       <div className="flex justify-between items-start mb-4">
-        <div className="text-xl font-semibold text-gray-800 flex-1 mr-2.5">{station.name}</div>
+        <div className="flex items-center gap-2 flex-1">
+          <button
+            onClick={() => onToggleFavorite(station.station_id)}
+            className="p-1 rounded-full transition-colors hover:bg-gray-100 cursor-pointer"
+            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Heart
+              size={20}
+              className={isFavorite ? 'fill-favorite text-favorite' : 'text-gray-400'}
+            />
+          </button>
+          <div className="text-xl font-semibold text-gray-800 flex-1">{station.name}</div>
+        </div>
         <div className="bg-linear-to-br from-primary to-primary-dark text-white py-1.5 px-3 rounded-full text-sm font-semibold whitespace-nowrap">{distanceDisplay}</div>
       </div>
 

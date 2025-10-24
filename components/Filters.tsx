@@ -34,9 +34,9 @@ export default function Filters({
           type="number"
           id="minBikes"
           value={minBikes}
-          min="1"
+          min="0"
           max="20"
-          onChange={(e) => onMinBikesChange(parseInt(e.target.value) || 3)}
+          onChange={(e) => onMinBikesChange(parseInt(e.target.value) || 0)}
           className="w-full p-2 border border-gray-300 rounded-md text-base grow"
         />
       </div>
